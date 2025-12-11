@@ -1,0 +1,14 @@
+{
+    "tokenizer_config": {
+      "vocab_size": 200,
+      "min_freq": 2,
+      "word_end": "</w>"
+    },
+    "project_metadata": {
+      "tokenizer_name": "bpe-greet-v1",
+      "tokenizer_save_path": "llm/tokenizers/bpe-greet/v1/tokenizer.json",
+      "data_path": "llm/greetings",
+      "data_file": "greetings.txt"
+    }
+  }
+  

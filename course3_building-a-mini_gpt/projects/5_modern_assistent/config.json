@@ -1,0 +1,28 @@
+{
+    "model_config": {
+      "d_model": 256,
+      "n_heads": 8,
+      "n_layers": 8,
+      "max_position_embeddings": 256,
+      "dropout": 0.1
+    },
+    "training_config": {
+      "batch_size": 16,
+      "block_size": 128,
+      "learning_rate": 0.0005,
+      "train_steps": 2000,
+      "num_epochs": 3,
+      "eval_interval": 100,
+      "eval_iters": 200
+    },
+    "project_metadata": {
+      "model_name": "gpt-bpe-v3",
+      "model_save_path": "llm/language_models/tiny_gpt",
+      "tokenizer_save_path": "llm/tokenizers/bpe-greet/v3/tokenizer.json",
+      "data_path": "llm/mixed_text",
+      "data_file": "multilang_data.txt",
+      "max_seq_length": 128,
+      "max_new_tokens": 80
+    }
+  }
+  
