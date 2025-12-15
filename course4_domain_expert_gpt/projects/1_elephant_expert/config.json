@@ -1,0 +1,40 @@
+{
+    "model_config": {
+      "d_model": 192,
+      "n_heads": 6,
+      "n_layers": 6,
+      "max_position_embeddings": 256,
+      "dropout": 0.1
+    },
+    "training_config": {
+      "batch_size": 8,
+      "block_size": 128,
+      "learning_rate": 0.0005,
+      "train_steps": 2000,
+      "num_epochs": 3,
+      "eval_interval": 100,
+      "eval_iters": 200
+    },
+    "project_metadata": {
+      "model_name": "gpt-bpe-v1",
+      "model_save_path": "llm/language_models/elephantdomain_gpt/",
+      "tokenizer_save_path": "llm/tokenizers/bpe-elephant/v1/tokenizer.json",
+      "data_path": "llm/mixed_text/out",
+      "data_file": "train.txt",
+      "max_seq_length": 128,
+      "max_new_tokens": 80
+    },
+    "data": {
+      "root_path": "llm/splits",
+      "train_file": "train.txt",
+      "val_file": "val.txt",
+      "test_file": "test.txt"
+    },
+   "tokenizer_config": {
+      "type": "byte_bpe", 
+      "vocab_size": 4096,
+      "min_freq": 2,
+      "special_tokens": ["<pad>", "<unk>", "<bos>", "<eos>"]
+    }
+  }
+  

@@ -1,5 +1,6 @@
 {
     "tokenizer_config": {
+      "type": "byte_bpe",    
       "vocab_size": 200,
       "min_freq": 2,
       "word_end": "</w>"
@@ -10,5 +11,6 @@
       "data_path": "llm/greetings",
       "data_file": "greetings.txt"
     }
+
   }
   
