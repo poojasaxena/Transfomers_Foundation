@@ -1,17 +1,18 @@
 {
-    "model_config": {
+     "model_config": {
       "d_model": 192,
-      "n_heads": 6,
-      "n_layers": 6,
+      "n_heads": 4,
+      "n_layers": 4,
       "max_position_embeddings": 256,
-      "dropout": 0.1
+      "dropout": 0.1,
+      "num_embeddings": 5096
     },
     "training_config": {
       "batch_size": 8,
       "block_size": 128,
       "learning_rate": 0.0005,
-      "train_steps": 2000,
-      "num_epochs": 3,
+      "train_steps": 10000,
+      "num_epochs": 5,
       "eval_interval": 100,
       "eval_iters": 200
     },
@@ -32,7 +33,7 @@
     },
    "tokenizer_config": {
       "type": "byte_bpe", 
-      "vocab_size": 4096,
+      "vocab_size": 5096,
       "min_freq": 2,
       "special_tokens": ["<pad>", "<unk>", "<bos>", "<eos>"]
     }

@@ -78,19 +78,32 @@ $ train-tokenizer --config 1_elephant_expert/config.json --tokenizer-type byte_b
 
 2. Run Model
 ```
-$ modern-gpt-train --config 1_elephant_expert/config.json --device auto 
+$ tiny-gpt-train --config 1_elephant_expert/config.json       
 [modern-gpt-train] Using device: cpu
 [modern-gpt-train] Using data file: /home/pooja-saxena/PoojaVault/Professional/Workbench/Datasets/llm/mixed_text/out/train.txt
-[modern-gpt-train] Tokenizer trained. Vocab size: 4095
+[modern-gpt-train] Tokenizer trained. Vocab size: 5096
 
 [modern-gpt-train] Starting training...
 
-Step 0, Loss: 8.3652
+Step 0, Loss: 8.4804
+Step 100, Loss: 4.1761
+Step 200, Loss: 3.9833
+...
+...
+Step 9300, Loss: 0.4263
+Step 9400, Loss: 0.4079
+Step 9500, Loss: 0.5277
+Step 9600, Loss: 0.5920
+Step 9700, Loss: 0.4692
+Step 9800, Loss: 0.6044
+Step 9900, Loss: 0.4550
+[modern-gpt-train] Model + tokenizer saved at: /home/pooja-saxena/PoojaVault/Professional/Workbench/Models/llm/language_models/elephantdomain_gpt/gpt-bpe-v1
 ```
 
 3. Infer 
 ```
-$ modern-gpt-infer  --config /path/to/project_config.json --prompt "Once upon a time" --device auto
+$ tiny-gpt-infer --config 1_elephant_expert/config.json --interactive
+
 ============================================================
 🧠 Modern GPT Inference
 ============================================================
@@ -104,11 +117,29 @@ Device             : cpu
 
 [modern-gpt-infer] Interactive mode (Ctrl+C to exit)
 
->>> Tell me something funny about Elephant
+>>> Tell me something ahout elephant
 
 ------------------------------------------------------------
-Prompt : Tell me something funny about Elephant
-Output : TmApuZp
+Prompt : Tell me something ahout elephant
+Output : Tell me something ahout elephant
+Human 1: Nice! I hope to volunteer to cook for the team in our next team offsite :)
+E2: The scent in the air is changing. It must be. A single joint injury can threaten survival. Evolution
 ------------------------------------------------------------
+
+>>> What is a tusk?
+
+------------------------------------------------------------
+Prompt : What is a tusk?
+Output : What is a tusk? 5 mean “trunk.”
+Question: Human 1: Get out of town!
+------------------------------------------------------------
+
+>>> ARe elephants big?
+
+------------------------------------------------------------
+Prompt : ARe elephants big?
+Output : ARe elephants big? fruit helps food, and greeting hands. Do you know sharing any good plans for the break?
+------------------------------------------------------------
+
 
 ```

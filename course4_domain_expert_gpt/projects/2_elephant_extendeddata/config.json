@@ -11,7 +11,7 @@
       "batch_size": 8,
       "block_size": 128,
       "learning_rate": 0.0005,
-      "train_steps": 3000,
+      "train_steps": 10000,
       "num_epochs": 5,
       "eval_interval": 100,
       "eval_iters": 200
@@ -22,6 +22,8 @@
       "tokenizer_save_path": "llm/tokenizers/bpe-elephant/v2/tokenizer.json",
       "data_path": "llm/mixed_text/out",
       "data_file": "train.txt",
+      "val_file": "val.txt",
+      "test_file": "test.txt",
       "max_seq_length": 128,
       "max_new_tokens": 80
     },
