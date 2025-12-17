@@ -1,3 +1,12 @@
+## Data used:
+```
+total 1184
+-rw-rw-r-- 1 pooja-saxena pooja-saxena 561044 Dec 16 11:18 elephant_human_90_10_corpus.txt
+-rw-rw-r-- 1 pooja-saxena pooja-saxena 512080 Dec 16 11:18 train.txt
+-rw-rw-r-- 1 pooja-saxena pooja-saxena  67069 Dec 16 11:18 val.txt
+-rw-rw-r-- 1 pooja-saxena pooja-saxena  62045 Dec 16 11:18 test.txt
+
+```
 ## Training the Model
 ```
 $ modern-gpt-train --config 3_elephant_improved/config.json --device auto
