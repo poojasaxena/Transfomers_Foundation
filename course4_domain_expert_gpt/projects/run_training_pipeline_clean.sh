@@ -4,15 +4,20 @@
 # 
 # How to run:
 # 1. Copy to your learning project directory
-# 2. cd "$LEARNING_ROOT/NLP_and_LLMs/Transfomers_Foundation/course4_domain_expert_gpt/project"
+# 2. cd "$LEARNING_ROOT/NLP_and_LLMs/Transfomers_Foundation/course4_doecho "🔤 Step 1: Checking tokenizer..."
+
+# Reuse the tokenizer path and status from dry-run check
+echo "🔍 Tokenizer path: $TOKENIZER_PATH"
+echo "📁 File check result:"
+ls -la "$TOKENIZER_PATH" 2>/dev/null || echo "   ❌ File not found at expected path"
+
+if [ "$TOKENIZER_EXISTS" = "true" ]; then
+    echo "✅ Tokenizer already exists: $TOKENIZER_PATH"
+    echo "🚀 Skipping tokenizer training..."jects"
 # 3. chmod +x run_training_pipeline.sh
 # 4. tmux new-session -d -s v4_training
 # 5. tmux attach-session -t v4_training
 # 6. ./run_training_pipeline.sh
-# 
-# Alternative with logging:
-# 4. tmux new-session -d -s v4_training "script -f -q training_log_$(date +%Y%m%d_%H%M%S).txt ./run_training_pipeline.sh"
-# 5. Check logs: tail -f training_log_*.txt
 # 
 # Features:
 # - Comprehensive dry-run with path validation
@@ -20,45 +25,13 @@
 # - Robust training with auto-retry (3 attempts)
 # - Interactive confirmation before execution
 # - System sleep prevention during training
-# - Optional logging support
 
 set -e
 
-# Check for dry-run flag
-DRY_RUN=false
-if [[ "$1" == "--dry-run" ]]; then
-    DRY_RUN=true
-fi
-
-# Automatic logging setup (skip for dry-run)
-if [ "$DRY_RUN" = false ]; then
-    LOG_FILE="training_log_$(date +%Y%m%d_%H%M%S).txt"
-    echo "📄 Logging all output to: $LOG_FILE"
-fi
-
-# Function to log both to console and file  
-log_echo() {
-    if [ "$DRY_RUN" = false ]; then
-        echo "$@" | tee -a "$LOG_FILE"
-    else
-        echo "$@"
-    fi
-}
-
-# Redirect all script output to both console and log file (skip for dry-run)
-if [ "$DRY_RUN" = false ]; then
-    exec > >(tee -a "$LOG_FILE")
-    exec 2>&1
-fi
-
-if [ "$DRY_RUN" = true ]; then
-    log_echo "🔍 RUNNING DRY RUN - Validation Only (No Training)"
-else
-    log_echo "🤖 Starting Robust LLM Training Pipeline V4..."
-fi
-log_echo "📅 Started at: $(date)"
-log_echo "🖥️  Host: $(hostname)"
-log_echo "💾 Available space: $(df -h . | tail -1 | awk '{print $4}')"
+echo "🤖 Starting Robust LLM Training Pipeline V4..."
+echo "📅 Started at: $(date)"
+echo "🖥️  Host: $(hostname)"
+echo "💾 Available space: $(df -h . | tail -1 | awk '{print $4}')"
 
 # Prevent system sleep during training
 echo "🔒 Preventing system sleep..."
@@ -70,7 +43,6 @@ sudo iwconfig wlan0 power off 2>/dev/null || true
 
 # Verify environment variables
 echo "🔧 Using GLOBAL_DATASETS_DIR: $GLOBAL_DATASETS_DIR"
-echo "🔧 Using GLOBAL_MODELS_DIR: $GLOBAL_MODELS_DIR"
 echo "🔧 Using LEARNING_ROOT: $LEARNING_ROOT"
 
 # Change to learning project directory
@@ -110,13 +82,11 @@ try:
     model_path = pm['model_save_path']
     data_path = pm['data_path']
     
-    # Handle relative paths with correct base directories
-    # Tokenizer and models should use GLOBAL_MODELS_DIR
-    if not tokenizer_path.startswith('/') and 'GLOBAL_MODELS_DIR' in os.environ:
-        tokenizer_path = os.path.join(os.environ['GLOBAL_MODELS_DIR'], tokenizer_path)
-    if not model_path.startswith('/') and 'GLOBAL_MODELS_DIR' in os.environ:
-        model_path = os.path.join(os.environ['GLOBAL_MODELS_DIR'], model_path)
-    # Data should use GLOBAL_DATASETS_DIR
+    # Handle relative paths
+    if not tokenizer_path.startswith('/') and 'GLOBAL_DATASETS_DIR' in os.environ:
+        tokenizer_path = os.path.join(os.environ['GLOBAL_DATASETS_DIR'], tokenizer_path)
+    if not model_path.startswith('/') and 'GLOBAL_DATASETS_DIR' in os.environ:
+        model_path = os.path.join(os.environ['GLOBAL_DATASETS_DIR'], model_path)
     if not data_path.startswith('/') and 'GLOBAL_DATASETS_DIR' in os.environ:
         data_path = os.path.join(os.environ['GLOBAL_DATASETS_DIR'], data_path)
     
@@ -196,14 +166,6 @@ echo "🔒 System sleep will be disabled during training"
 echo "📡 WiFi power management will be disabled"
 echo ""
 
-# Exit here if dry-run mode
-if [ "$DRY_RUN" = true ]; then
-    echo "✅ DRY RUN COMPLETE - All validation checks passed!"
-    echo "🎯 Everything looks good for training"
-    echo "🚀 To start actual training: ./start_training_with_logs.sh"
-    exit 0
-fi
-
 # Interactive confirmation
 echo "🤔 Do you want to proceed with training? (y/n)"
 read -r PROCEED
@@ -261,10 +223,10 @@ with open('$CONFIG_PATH', 'r') as f:
     config = json.load(f)
 tokenizer_path = config['project_metadata']['tokenizer_save_path']
 if not tokenizer_path.startswith('/'):
-    # Handle relative paths - use GLOBAL_MODELS_DIR for tokenizers
+    # Handle relative paths
     import os
-    if 'GLOBAL_MODELS_DIR' in os.environ:
-        tokenizer_path = os.path.join(os.environ['GLOBAL_MODELS_DIR'], tokenizer_path)
+    if 'GLOBAL_DATASETS_DIR' in os.environ:
+        tokenizer_path = os.path.join(os.environ['GLOBAL_DATASETS_DIR'], tokenizer_path)
 print(tokenizer_path)
 " 2>/dev/null || echo "")
 
