@@ -1,3 +1,8 @@
+## Comments
+1. Data is good amount 
+2. Due to RAM constrained, we decided to relax the model architecture, however inference looks promising than before.
+3. But as it look like, we still have room for model complexity, since the training was over in less than two hours. So in next project, we will complex the architecture.
+
 ## Data Preparation
 ```
 📊 Key outputs:
@@ -8,9 +13,7 @@
 
 ### Full pipeline
 ```
-run-data-pipeline                    1 ✘  ▼  llm_course Py  18:57:40 
-
-
+$ run-data-pipeline     
 
 
 🐘 Enhanced Elephant LLM Data Pipeline Starting...
@@ -136,3 +139,113 @@ $ train-tokenizer --config 4_elephant_twicedata/config.json --tokenizer-type byt
      Type: byte_bpe, Vocab size: 6144
 ```
 
+## Train Model
+```
+2025-12-18 10:11:31,325 | INFO | llmlib.cli.modern_gpt_train_cli | [modern-gpt-train] Using device: cpu
+2025-12-18 10:11:31,325 | INFO | llmlib.cli.modern_gpt_train_cli | [modern-gpt-train] Using data file: /home/pooja-saxena/PoojaVault/Professional/Workbench/Datasets/llm/mixed_text/out/train.txt
+2025-12-18 10:11:31,355 | INFO | llmlib.cli.modern_gpt_train_cli | [modern-gpt-train] Tokenizer vocab size: 6144
+PAD: 0
+BOS: 2
+EOS: 3
+
+============================================================
+🚀 modern-gpt-train
+============================================================
+Model Name       : gpt-bpe-v4
+Vocabulary Size  : 6144
+d_model          : 256
+n_heads          : 8
+n_layers         : 6
+dropout          : 0.15
+max_seq_length   : 256
+batch_size       : 4
+learning_rate    : 0.0002
+train_steps      : 18000
+============================================================
+
+Step 0, Train Loss: 8.8398, Val Loss: 7.9104
+Step 1, Train Loss: 8.0866, Val Loss: 7.4456
+Step 2, Train Loss: 7.5197, Val Loss: 7.2011
+Step 3, Train Loss: 7.2668, Val Loss: 7.0094
+Step 4, Train Loss: 6.8149, Val Loss: 6.8692
+Step 5, Train Loss: 6.9277, Val Loss: 6.7721
+Step 6, Train Loss: 6.8303, Val Loss: 6.6983
+Step 7, Train Loss: 6.6118, Val Loss: 6.6384
+...
+...
+Step 16800, Train Loss: 1.1643, Val Loss: 1.7561
+Step 17000, Train Loss: 1.5488, Val Loss: 1.7880
+Step 17200, Train Loss: 0.7796, Val Loss: 1.7157
+Step 17400, Train Loss: 1.6142, Val Loss: 1.7343
+Step 17600, Train Loss: 0.8395, Val Loss: 1.7142
+Step 17800, Train Loss: 1.3213, Val Loss: 1.7316
+
+[modern-gpt-train] Model saved to: /home/pooja-saxena/PoojaVault/Professional/Workbench/Models/llm/language_models/elephantdomain_gpt/gpt-bpe-v4/model.pt
+[modern-gpt-train] Tokenizer saved to: /home/pooja-saxena/PoojaVault/Professional/Workbench/Models/llm/language_models/elephantdomain_gpt/gpt-bpe-v4/tokenizer.json
+
+```
+
+## Inference
+```
+ $ modern-gpt-infer  --config 4_elephant_twicedata/config.json
+2025-12-18 12:48:48,715 | INFO | llmlib.cli.modern_gpt_infer_cli | [modern-gpt-infer] Using device: cpu
+
+============================================================
+🧠 Modern GPT Inference
+============================================================
+Project config     : ~/Learning/NLP_and_LLMs/Transfomers_Foundation/course4_domain_expert_gpt/projects/4_elephant_twicedata/config.json
+Model directory    : ~/Workbench/Models/llm/language_models/elephantdomain_gpt/gpt-bpe-v4
+Checkpoint         : ~/Workbench/Models/llm/language_models/elephantdomain_gpt/gpt-bpe-v4/model.pt
+Model config       : ~/Workbench/Models/llm/language_models/elephantdomain_gpt/gpt-bpe-v4/model_config.json
+Tokenizer type     : ByteBPETokenizer
+Vocab size         : 6144
+Special tokens     : ['<pad>', '<unk>', '<bos>', '<eos>']
+Device             : cpu
+Max sequence len   : 256
+Max new tokens     : 150
+============================================================
+
+🤖 Interactive ModernGPT Inference
+Type your prompts below. Type 'quit', 'exit', or press Ctrl+C to stop.
+
+Enter a prompt: hello
+---
+Prompt : hello
+Output : helloHuman How's your day going?
+
+Enter a prompt: I am good, how are you?
+---
+Prompt : I am good, how are you?
+Output : I am good, how are you? Trying on the holidays.
+
+Enter a prompt: tell me something about Elephant
+---
+Prompt : tell me something about Elephant
+Output : tell me something about Elephant meat.
+
+Enter a prompt: Elephants are 
+---
+Prompt : Elephants are
+Output : Elephants are capable of surprisingly fast speeds—up to around 25 km/h—though their gait never involves true running; at maximum speed, they maintain at least one foot on the ground additionally, foot health is critical, especially for captive elephants; improper flooring or uneven terrain can lead to abscesses and arthritis
+
+Enter a prompt: asian elephants
+---
+Prompt : asian elephants
+Output : asian elephants and both african elephant species are endangered Additionally, elephants also interact with gentle trunk touches
+
+Enter a prompt: Tell me a funny joke about eLephant
+---
+Prompt : Tell me a funny joke about eLephant
+Output : Tell me a funny joke about eLephant and mud sagicly
+
+Enter a prompt: funny thing about elehants
+---
+Prompt : funny thing about elehants
+Output : funny thing about elehants patterns by crapile, rising, but require moist habitats to have areas had diger.
+
+Enter a prompt: what is tusk
+---
+Prompt : what is tusk
+Output : what is tusk care about?
+
+```
