@@ -16,10 +16,20 @@
       "eval_interval": 500,
       "eval_iters": 200,
       "warmup_steps": 1000,
-      "weight_decay": 1e-4
+      "weight_decay": 1e-4,
+      "early_stopping": {
+            "enabled": true,
+            "patience_evals": 8,
+            "min_delta": 0.0
+          },
+      "save": {
+             "save_last": true,
+             "save_best": true,
+             "finalize_model_as": "best"
+      }
     },
     "project_metadata": {
-      "model_name": "gpt-bpe-v5",
+      "model_name": "gpt-bpe-v6",
       "model_save_path": "llm/language_models/elephantdomain_gpt/",
       "tokenizer_save_path": "llm/tokenizers/bpe-elephant/v4/tokenizer.json",
       "data_path": "llm/mixed_text/out",
@@ -34,5 +44,12 @@
       "vocab_size": 6144,
       "min_freq": 2,
       "special_tokens": ["<pad>", "<unk>", "<bos>", "<eos>"]
-    }
+    },
+    "inference_config": {
+        "seed": 42,                     
+        "temperature": 0.7,
+        "top_k": 20,
+        "avoid_eos_first_n": 0
+}
+
 }

@@ -1,3 +1,19 @@
+## 🎯 Overall Assessment:
+Success Rating: 7.5/10 🌟
+
+Strengths:
+✅ Domain expertise achieved - Model learned elephant facts very well
+✅ Factual consistency - Responses contain real elephant information
+✅ Topic coherence - Stays focused on elephant domain
+✅ Training objective met - Successfully created a domain-specific model
+
+## 🚀 Recommendations:
+1. For Model Improvement:
+    *  Increase training data diversity within elephant domain
+    *  Add more conversational examples if general chat is needed
+    *  Tune generation parameters (temperature, top-k, top-p)
+    *  Consider larger model if computational resources allow
+
 ## How to run pipeline
 ```
 # Validate first (Dry Run)
@@ -55,12 +71,97 @@ llmlib train-pipeline --config 5_complex_architecture/config.json --dry-run
 ```
 
 2. Start TMux Training
+
 ```
-llmlib tmux start --config 5_complex_architecture/config.json --auto-confirm
-2025-12-18 13:52:13,939 | INFO | llmlib.cli.tmux_cli | 🚀 Starting training session: llmlib-config-1218_1352
-2025-12-18 13:52:13,967 | INFO | llmlib.cli.tmux_cli | ✅ Created tmux session: llmlib-config-1218_1352
-2025-12-18 13:52:13,967 | INFO | llmlib.cli.tmux_cli | ✅ Training started in session: llmlib-config-1218_1352
-2025-12-18 13:52:13,967 | INFO | llmlib.cli.tmux_cli | 📺 To attach: tmux attach-session -t llmlib-config-1218_1352
-2025-12-18 13:52:13,967 | INFO | llmlib.cli.tmux_cli | 📺 Or use: llmlib tmux attach llmlib-config-1218_1352
-2025-12-18 13:52:13,967 | INFO | llmlib.cli.tmux_cli | 🔍 To monitor: llmlib tmux status
+$ modern-gpt-train --config 5_complex_architecture/config.json
+=== TRAINING START INFO ===
+Model Name       : gpt-bpe-v5
+Vocabulary Size  : 6144
+d_model          : 384
+n_heads          : 12
+n_layers         : 12
+train_steps      : 35000
+
+=== LOSS PROGRESSION (Start, Middle, End) ===
+Step 0, Train Loss: 8.9381, Val Loss: 7.4531
+Step 1, Train Loss: 7.5068, Val Loss: 6.8305
+Step 2, Train Loss: 6.6792, Val Loss: 6.5137
+Step 3, Train Loss: 6.2237, Val Loss: 6.3332
+Step 4, Train Loss: 6.2838, Val Loss: 6.2302
+...
+Step 32500, Train Loss: 0.2804, Val Loss: 1.4529
+Step 33000, Train Loss: 0.2856, Val Loss: 1.4137
+Step 33500, Train Loss: 0.2796, Val Loss: 1.3948
+Step 34000, Train Loss: 0.3748, Val Loss: 1.4781
+Step 34500, Train Loss: 0.3107, Val Loss: 1.4169
+
+```
+
+3. Inference
+```
+modern-gpt-infer --config 5_complex_architecture/config.json
+2025-12-19 15:04:41,340 | INFO | llmlib.cli.modern_gpt_infer_cli | [modern-gpt-infer] Using device: cpu
+
+============================================================
+🧠 Modern GPT Inference
+============================================================
+Project config     : ~/Learning/NLP_and_LLMs/Transfomers_Foundation/course4_domain_expert_gpt/projects/5_complex_architecture/config.json
+Model directory    : ~/Workbench/Models/llm/language_models/elephantdomain_gpt/gpt-bpe-v5
+Checkpoint         : ~/Workbench/Models/llm/language_models/elephantdomain_gpt/gpt-bpe-v5/model.pt
+Model config       : ~/Workbench/Models/llm/language_models/elephantdomain_gpt/gpt-bpe-v5/model_config.json
+Tokenizer type     : ByteBPETokenizer
+Vocab size         : 6144
+Special tokens     : ['<pad>', '<unk>', '<bos>', '<eos>']
+Device             : cpu
+Max sequence len   : 512
+Max new tokens     : 200
+============================================================
+
+🤖 Interactive ModernGPT Inference
+Type your prompts below. Type 'quit', 'exit', or press Ctrl+C to stop.
+
+Enter a prompt: Elephants are
+---
+Prompt : Elephants are
+Output : Elephants are found in Africa and Asia in grasslands and forests In related news, asian elephants have smaller ears than african elephants
+
+Enter a prompt: Asian Elephants are
+---
+Prompt : Asian Elephants are
+Output : Asian Elephants are megaherbivores, consuming large amount of plant matter In related news, pictured are grazing elephants from kerala, india
+
+Enter a prompt: Tell me something funny about elephant?
+---
+Prompt : Tell me something funny about elephant?
+Output : Tell me something funny about elephant? spend much of their day sestrucle sely.
+
+Enter a prompt: Are elephants funny?
+---
+Prompt : Are elephants funny?
+Output : Are elephants funny? They grow throughout their African cousins, inhabit dense forests and learning.
+
+Enter a prompt: Elephant babies are 
+---
+Prompt : Elephant babies are
+Output : Elephant babies are right- or left--tusked, just as humans are right- or left-handed Furthermore, a: forest elephants typically live 60-70 years in the wild
+
+Enter a prompt: joke on elephant
+---
+Prompt : joke on elephant
+Output : joke on elephant foot has a fatty, cushion-like pad that acts like a shock absorber In related news, this makes elephants surprisingly quiet
+
+Enter a prompt: Are elephants dangerous?
+---
+Prompt : Are elephants dangerous?
+Output : Are elephants dangerous?? They are 25 distributed in the ever moist decidpted long trunks onto their faces This adaptation helps them survive in their natural habitat.
+
+Enter a prompt: how are you?
+---
+Prompt : how are you?
+Output : how are you?[2] ...
+
+Enter a prompt: Hi
+---
+Prompt : Hi
+Output : Hi and culmeat
 ```
