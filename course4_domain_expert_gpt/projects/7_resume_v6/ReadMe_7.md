@@ -9,7 +9,7 @@ Success Rating: ?10 🌟
 
 ## 🚀 Recommendations:
 1. For Model Improvement:
-    *  ???
+    *  modify the path `"resume_from": "gpt-bpe-v6"` later
 
 ## How to run pipeline
 ```
